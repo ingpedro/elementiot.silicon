@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>ElementIoT.Silicon.Service.Command</AssemblyName>
+    <RootNamespace>ElementIoT.Silicon.Service.Command</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Handler\Command\ElementIoT.Silicon.Handler.Command.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ElementIoT.Particle.Infrastructure.Model">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ElementIoT.Particle.Infrastructure.Processor">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Processor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

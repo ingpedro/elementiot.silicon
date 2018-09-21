@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ElementIoT.Silicon.Api.Gateway</name>
+    </assembly>
+    <members>
+        <member name="T:ElementIoT.Silicon.Api.Gateway.Controllers.Command.DeviceController">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:ElementIoT.Particle.Infrastructure.Api.CommonController" />
+        </member>
+        <member name="P:ElementIoT.Silicon.Api.Gateway.Controllers.Command.DeviceController.DeviceService">
+            <summary>
+            Gets the device service.
+            </summary>
+            <value>
+            The device service.
+            </value>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Controllers.Command.DeviceController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,ElementIoT.Particle.Operational.Logging.ILogPolicy,ElementIoT.Particle.Operational.Error.IErrorPolicy,ElementIoT.Silicon.Service.Command.IDeviceService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ElementIoT.Silicon.Api.Gateway.Controllers.Command.DeviceController" /> class.
+            </summary>
+            <param name="configService">The configuration service.</param>
+            <param name="logService">The log service.</param>
+            <param name="errorService">The error service.</param>
+            <param name="deviceService">The device service.</param>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Controllers.Command.DeviceController.ProvisionDevice(ElementIoT.Silicon.Domain.Model.Command.ProvisionDeviceCommand)">
+            <summary>
+            Provisions a new device in the platform.
+            </summary>
+            <param name="command">The command.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ElementIoT.Silicon.Api.Gateway.Controllers.Query.DeviceController">
+            <summary>
+            
+            </summary>
+            <seealso cref="T:ElementIoT.Particle.Infrastructure.Api.CommonController" />
+        </member>
+        <member name="P:ElementIoT.Silicon.Api.Gateway.Controllers.Query.DeviceController.DeviceRepository">
+            <summary>
+            Gets the device repository.
+            </summary>
+            <value>
+            The device service.
+            </value>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Controllers.Query.DeviceController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,ElementIoT.Particle.Operational.Logging.ILogPolicy,ElementIoT.Particle.Operational.Error.IErrorPolicy,ElementIoT.Silicon.Repository.Query.IDeviceRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ElementIoT.Silicon.Api.Gateway.Controllers.Query.DeviceController" /> class.
+            </summary>
+            <param name="configService">The configuration service.</param>
+            <param name="logService">The log service.</param>
+            <param name="errorService">The error service.</param>
+            <param name="deviceService">The device service.</param>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Controllers.Query.DeviceController.GetDevice(System.String)">
+            <summary>
+            Gets the device.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ElementIoT.Silicon.Api.Gateway.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ElementIoT.Silicon.Api.Gateway.Startup"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:ElementIoT.Silicon.Api.Gateway.Startup.Configuration">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures the services.
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">The services.</param>
+        </member>
+        <member name="M:ElementIoT.Silicon.Api.Gateway.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Configures the specified application.
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="env">The env.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>ElementIoT.Silicon.DataProvider.AzureProvider</AssemblyName>
+    <RootNamespace>ElementIoT.Silicon.DataProvider.AzureProvider</RootNamespace>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>ElementIoT.Silicon.Domain.Contract</AssemblyName>
+    <RootNamespace>ElementIoT.Silicon.Domain.Contract</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="DataProvider\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
+</Project>

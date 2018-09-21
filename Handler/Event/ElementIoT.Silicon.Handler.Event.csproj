@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>ElementIoT.Silicon.Handler.Event</AssemblyName>
+    <RootNamespace>ElementIoT.Silicon.Handler.Event</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DeviceEventHandler.*.cs">
+      <DependentUpon>DeviceEventHandler.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ElementIoT.Particle.Infrastructure.Model">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ElementIoT.Particle.Infrastructure.Processor">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Processor.dll</HintPath>
+    </Reference>
+    <Reference Include="ElementIoT.Particle.Operational.Error">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Operational.Error.dll</HintPath>
+    </Reference>
+    <Reference Include="ElementIoT.Particle.Operational.Logging">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Operational.Logging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

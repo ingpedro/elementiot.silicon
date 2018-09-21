@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>ElementIoT.Silicon.Domain.Model</AssemblyName>
+    <RootNamespace>ElementIoT.Silicon.Domain.Model</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Search\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="5.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ElementIoT.Particle.Infrastructure.Model">
+      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
