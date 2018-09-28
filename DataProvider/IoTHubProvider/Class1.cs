@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ElementIoT.Silicon.DataProvider.AzureProvider
+namespace ElementIoT.Silicon.DataProvider.IoTHubProvider
 {
     public class Class1
     {
