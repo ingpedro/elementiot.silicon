@@ -11,14 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ElementIoT.Particle.Infrastructure.Model" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="5.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ElementIoT.Particle.Infrastructure.Model">
-      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Model.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

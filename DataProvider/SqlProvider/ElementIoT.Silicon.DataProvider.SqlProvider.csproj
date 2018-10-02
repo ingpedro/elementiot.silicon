@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Error" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Logging" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Resource" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Resource\Messages\ElementIoT.Silicon.Resource.Messages.csproj" />
+  </ItemGroup>
+
+</Project>

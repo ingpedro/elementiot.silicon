@@ -44,7 +44,18 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         /// The type of the device.
         /// </value>
         [Required]
-        [JsonProperty("deviceTypeId")]
+        [JsonProperty("deviceTypeKey")]
+        public Guid DeviceTypeKey
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the device.
+        /// </summary>
+        /// <value>
+        /// The type of the device.
+        /// </value>
+        [Required]
+        [JsonProperty("deviceTypeID")]
         public string DeviceTypeID
         { get; set; }
 

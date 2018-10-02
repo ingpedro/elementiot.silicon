@@ -37,7 +37,7 @@ namespace ElementIoT.Silicon.DataProvider.AzureProvider.Entities
 
         public static DeviceTableEntity FromDomain(Device entity)
         {
-            DeviceTableEntity tableEntity = new DeviceTableEntity(entity.DeviceType.Name, entity.ID);
+            DeviceTableEntity tableEntity = new DeviceTableEntity(entity.DeviceType.Name, entity.HubID);
 
 
             return tableEntity;

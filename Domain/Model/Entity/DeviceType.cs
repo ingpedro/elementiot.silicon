@@ -17,10 +17,25 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
 
         #region Properties
 
-        public string ID
+        public string DeviceTypeID
         { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the device.
+        /// </summary>
+        /// <value>
+        /// The name of the device.
+        /// </value>
         public string Name
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description of the device.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        public string Description
         { get; set; }
 
         // TODO: DEFINE: Add more properties for this type.

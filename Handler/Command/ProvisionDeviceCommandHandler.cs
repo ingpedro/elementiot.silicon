@@ -96,11 +96,14 @@ namespace ElementIoT.Silicon.Handler.Command
         {
             Device entity = new Device
             {
-                ID = command.DeviceID,
+                HubID = command.DeviceID,
                 Name = command.DeviceName,
-                DeviceType = new DeviceType { ID = command.DeviceTypeID},
-                ParentDevice = new Device { ID = command.PrentDeviceID },
-                IsMaster = command.IsMaster
+                DeviceType = new DeviceType {
+                    Key = command.DeviceTypeKey,
+                    DeviceTypeID = command.DeviceTypeID
+                },
+                ParentDevice = new Device { HubID = command.PrentDeviceID },
+                IsRoot = command.IsMaster
             };
 
             return entity;
