@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataProvider\IoTHubProvider\ElementIoT.Silicon.DataProvider.IoTHubProvider.csproj" />
+    <ProjectReference Include="..\..\DataProvider\SqlProvider\ElementIoT.Silicon.DataProvider.SqlProvider.csproj" />
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
   </ItemGroup>
 

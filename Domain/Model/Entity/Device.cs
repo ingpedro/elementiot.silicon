@@ -6,7 +6,7 @@ using System.Text;
 namespace ElementIoT.Silicon.Domain.Model.Entity
 {
     /// <summary>
-    /// 
+    /// Defines a type that represents a device with its platform and field properties
     /// </summary>
     /// <seealso cref="AggregateRoot" />
     public class Device: AggregateRoot
@@ -16,15 +16,6 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the value that the IoT Hub will use to identify the device in its registry.
-        /// </summary>
-        /// <value>
-        /// The hub identifier.
-        /// </value>
-        public string HubID
-        { get; set; }
 
         /// <summary>
         /// Gets or sets the value that the application and customer will use to identify the device.
@@ -51,6 +42,15 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         /// The description.
         /// </value>
         public string Description
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the device identity that holds the information of the device in the IoT Hub.
+        /// </summary>
+        /// <value>
+        /// The identity.
+        /// </value>
+        public DeviceIdentity Identity
         { get; set; }
 
         /// <summary>
@@ -97,6 +97,8 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         /// </value>
         public ICollection<Device> ChildDevices
         { get; set; }
+
+
 
         #endregion
 

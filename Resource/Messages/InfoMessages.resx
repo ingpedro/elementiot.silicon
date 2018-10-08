@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DataProvider_ConnectionStringKeyMissing" xml:space="preserve">
-    <value>The connection string key is not present in the configuration.</value>
-  </data>
-  <data name="DataProvider_FailedtoSaveEntity" xml:space="preserve">
-    <value>The data provider failed to save the given entity into the data base</value>
-  </data>
-  <data name="DataProvider_PrimaryKeyWasNotReturned" xml:space="preserve">
-    <value>The primary key was not returned by the procedure</value>
-  </data>
-  <data name="IoTHubProvider_ProvisionDeviceIdentityFailed" xml:space="preserve">
-    <value>The provisioing of the device failed while trying to add it to the IoT Hub</value>
-  </data>
-  <data name="Validation_DeviceIDMissing" xml:space="preserve">
-    <value>The device identifier use by the client is missing</value>
-  </data>
-  <data name="Validation_DeviceTypeKeyMissing" xml:space="preserve">
-    <value>The device type row key identifier is missing</value>
-  </data>
-  <data name="Validation_HubIDMissing" xml:space="preserve">
-    <value>The IoT Hub device identifier is missing</value>
+  <data name="IoTHubProvider_DeviceHubIdAlreadyExists" xml:space="preserve">
+    <value>The provided Hub ID for the device already exists in the IoT Hub</value>
   </data>
 </root>

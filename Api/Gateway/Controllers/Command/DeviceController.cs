@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Threading.Tasks;
-using ElementIoT.Silicon.Domain.Model.Command;
-using ElementIoT.Silicon.Service.Command;
 using ElementIoT.Particle.Infrastructure.Api;
 using ElementIoT.Particle.Operational.Error;
 using ElementIoT.Particle.Operational.Logging;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using ElementIoT.Silicon.Domain.Model.Command;
+using ElementIoT.Silicon.Service.Command;
 
 namespace ElementIoT.Silicon.Api.Gateway.Controllers.Command
 {
     /// <summary>
-    /// 
+    /// Controller responsible for exposing the APIs that are used to manage Devices both in the Patform and in the IoT Hub
     /// </summary>
-    /// <seealso cref="ElementIoT.Particle.Infrastructure.Api.CommonController" />
+    /// <seealso cref="CommonController" />
     [Produces("application/json")]
     [Route("api/silicon/device")]
     [ApiController]

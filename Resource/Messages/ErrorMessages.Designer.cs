@@ -88,6 +88,15 @@ namespace ElementIoT.Silicon.Resource.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provisioing of the device failed while trying to add it to the IoT Hub.
+        /// </summary>
+        public static string IoTHubProvider_ProvisionDeviceIdentityFailed {
+            get {
+                return ResourceManager.GetString("IoTHubProvider_ProvisionDeviceIdentityFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The device identifier use by the client is missing.
         /// </summary>
         public static string Validation_DeviceIDMissing {

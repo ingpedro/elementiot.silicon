@@ -41,14 +41,14 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
 
         #region Constructors
 
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="SiliconSQLProvider" /> class.
+        /// Initializes a new instance of the <see cref="SiliconSQLProvider"/> class.
         /// </summary>
         /// <param name="configService">The configuration service.</param>
         /// <param name="errorService">The error service.</param>
         /// <param name="logService">The log service.</param>
         /// <exception cref="IoTException"></exception>
-        /// <exception cref="ArgumentNullException">dbKey</exception>
         public SiliconSQLProvider(IConfiguration configService, IErrorPolicy errorService, ILogPolicy logService)
         {
             this.ConfigService = configService;

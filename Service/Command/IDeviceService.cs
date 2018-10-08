@@ -8,6 +8,11 @@ namespace ElementIoT.Silicon.Service.Command
 {
     public interface IDeviceService
     {
+        /// <summary>
+        /// Provisions a new device in the platform.
+        /// </summary>
+        /// <param name="command">The command.</param>
+        /// <returns></returns>
         Task ProvisionDevice(ProvisionDeviceCommand command);
     }
 }

@@ -8,6 +8,11 @@ using System.Text;
 
 namespace ElementIoT.Silicon.Domain.Model.Command
 {
+    /// <summary>
+    /// Command that encapsulates the necessary properties for provisioning a device
+    /// </summary>
+    /// <seealso cref="ElementIoT.Particle.Infrastructure.Model.Messaging.MessagingCommand" />
+    /// <seealso cref="MediatR.IRequest{System.String}" />
     public class ProvisionDeviceCommand : MessagingCommand, IRequest<string>
     {
         #region Fields
@@ -22,6 +27,8 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         /// The device identifier.
         /// </value>
         [Required]
+        [MinLength(5)]
+        [MaxLength(50)]
         [JsonProperty("deviceId")]
         public string DeviceID
         { get; set; }
@@ -32,9 +39,18 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         /// <value>
         /// The name of the device.
         /// </value>
-        [Required]
         [JsonProperty("deviceName")]
         public string DeviceName
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description of the device.
+        /// </summary>
+        /// <value>
+        /// The name of the device.
+        /// </value>
+        [JsonProperty("deviceDescription")]
+        public string DeviceDescription
         { get; set; }
 
         /// <summary>
@@ -49,35 +65,25 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the device.
-        /// </summary>
-        /// <value>
-        /// The type of the device.
-        /// </value>
-        [Required]
-        [JsonProperty("deviceTypeID")]
-        public string DeviceTypeID
-        { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether this instance is master.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is master; otherwise, <c>false</c>.
         /// </value>
-        [JsonProperty("isMaster")]
-        public bool IsMaster
+        [JsonProperty("isRoot",DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool IsRoot
         { get; set; }
 
         /// <summary>
-        /// Gets or sets the prent device identifier.
+        /// Gets or sets a value indicating whether this instance is enabled.
         /// </summary>
         /// <value>
-        /// The prent device identifier.
+        ///   <c>true</c> if this instance is enabled; otherwise, <c>false</c>.
         /// </value>
-        [JsonProperty("prentDeviceId")]
-        public string PrentDeviceID
+        [JsonProperty("isEnabled", DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool IsEnabled
         { get; set; }
+
 
         #endregion
 

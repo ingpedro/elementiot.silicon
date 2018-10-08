@@ -14,6 +14,11 @@
     <Compile Update="DeviceEventHandler.*.cs">
       <DependentUpon>DeviceEventHandler.cs</DependentUpon>
     </Compile>
+
+    <Compile Update="IoTHubEventHandler.*.cs">
+      <DependentUpon>IoTHubEventHandler.cs</DependentUpon>
+    </Compile>
+    
   </ItemGroup>
 
   <ItemGroup>

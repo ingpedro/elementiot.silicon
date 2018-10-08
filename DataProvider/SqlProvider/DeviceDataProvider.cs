@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 namespace ElementIoT.Silicon.DataProvider.SqlProvider
 {
     /// <summary>
-    /// 
+    /// Data Provider resposible for handling the data actions for Devices using SQL.
     /// </summary>
     /// <seealso cref="ElementIoT.Silicon.DataProvider.SqlProvider.SiliconSQLProvider" />
-    public class DeviceDataProvider: SiliconSQLProvider
+    public class DeviceDataProvider : SiliconSQLProvider, IDeviceDataProvider
     {
         #region Fields
         #endregion
@@ -33,7 +33,7 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
         /// <param name="errorService">The error service.</param>
         /// <param name="logService">The log service.</param>
         public DeviceDataProvider(IConfiguration configService, IErrorPolicy errorService, ILogPolicy logService)
-            :base(configService, errorService, logService)
+            : base(configService, errorService, logService)
         {
 
         }
@@ -43,51 +43,47 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
         #region Methods
 
         /// <summary>
-        /// Saves the device.
+        /// Provisions a new device in the platform's database
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        public async Task<Device> SaveDevice(Device entity)
+        public async Task<Device> ProvisionDevice(Device entity)
         {
-            try
-            {
-                if (entity == null)
-                    throw new ArgumentNullException(nameof(entity));
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-                var parameters = new DynamicParameters();
+            if (entity.Identity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-                if(!string.IsNullOrWhiteSpace(entity.HubID))
-                    parameters.Add("@HubID", entity.HubID, DbType.String, ParameterDirection.Input);
-                else
-                    throw new ArgumentException(ErrorMessages.Validation_HubIDMissing, "Hub ID");
+            var parameters = new DynamicParameters();
 
-                if (!string.IsNullOrWhiteSpace(entity.DeviceID))
-                    parameters.Add("@DeviceID", entity.DeviceID, DbType.String, ParameterDirection.Input);
-                else
-                    throw new ArgumentException(ErrorMessages.Validation_DeviceIDMissing, "Device ID");
+            if(!string.IsNullOrWhiteSpace(entity.Identity.HubID))
+                parameters.Add("@HubID", entity.Identity.HubID, DbType.String, ParameterDirection.Input);
+            else
+                throw new ArgumentException(ErrorMessages.Validation_HubIDMissing, "Hub ID");
 
-                if (entity.DeviceType != null && entity.DeviceType.Key != default(Guid))
-                    parameters.Add("@DeviceTypeKey", entity.DeviceType.Key, DbType.Guid, ParameterDirection.Input);
-                else
-                    throw new ArgumentException(ErrorMessages.Validation_DeviceTypeKeyMissing, "Device Type Key");
+            if (!string.IsNullOrWhiteSpace(entity.DeviceID))
+                parameters.Add("@DeviceID", entity.DeviceID, DbType.String, ParameterDirection.Input);
+            else
+                throw new ArgumentException(ErrorMessages.Validation_DeviceIDMissing, "Device ID");
 
-                parameters.Add("@Name", entity.Name, DbType.String, ParameterDirection.Input);
-                parameters.Add("@Description", entity.Description, DbType.String, ParameterDirection.Input);
-                parameters.Add("@IsRoot", entity.IsRoot, DbType.Boolean, ParameterDirection.Input);
-                parameters.Add("@IsEnabled", entity.IsEnabled, DbType.Boolean, ParameterDirection.Input);
+            if (entity.DeviceType != null && entity.DeviceType.Key != default(Guid))
+                parameters.Add("@DeviceTypeKey", entity.DeviceType.Key, DbType.Guid, ParameterDirection.Input);
+            else
+                throw new ArgumentException(ErrorMessages.Validation_DeviceTypeKeyMissing, "Device Type Key");
 
-                parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Name", entity.Name, DbType.String, ParameterDirection.Input);
+            parameters.Add("@Description", entity.Description, DbType.String, ParameterDirection.Input);
+            parameters.Add("@IsRoot", entity.IsRoot, DbType.Boolean, ParameterDirection.Input);
+            parameters.Add("@IsEnabled", entity.IsEnabled, DbType.Boolean, ParameterDirection.Input);
 
-                var procedure = "[Device].[USPCreateDevice]";
+            parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String, ParameterDirection.Input);
 
-                CommandDefinition command = new CommandDefinition(procedure, parameters: parameters, commandType: CommandType.StoredProcedure);
+            var procedure = "[Device].[USPCreateDevice]";
 
-                await this.ExecuteAsync(command);
-            }
-            catch (Exception ex)
-            {
-                throw this.ErrorService.HandleError(ex, ErrorMessages.DataProvider_FailedtoSaveEntity);
-            }
+            CommandDefinition command = new CommandDefinition(procedure, parameters: parameters, commandType: CommandType.StoredProcedure);
+
+            await this.ExecuteAsync(command);
 
             return entity;
         }

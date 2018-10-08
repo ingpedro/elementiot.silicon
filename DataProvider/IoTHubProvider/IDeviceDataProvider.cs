@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ElementIoT.Silicon.Domain.Model.Entity;
 
-namespace ElementIoT.Silicon.Repository.Command
+namespace ElementIoT.Silicon.DataProvider.IoTHubProvider
 {
-    public interface IDeviceRepository
+    public interface IDeviceDataProvider
     {
         Task<Device> ProvisionDevice(Device entity);
     }

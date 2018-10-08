@@ -13,6 +13,11 @@ using ElementIoT.Particle.Operational.Error;
 
 namespace ElementIoT.Silicon.Handler.Command
 {
+    /// <summary>
+    /// Command Handler responsible for provisioning a device intot he IoT Hub and into the applications's database
+    /// </summary>
+    /// <seealso cref="CommandHandler{ProvisionDeviceCommand}" />
+    /// <seealso cref="IRequestHandler{ProvisionDeviceCommand, String}" />
     public class ProvisionDeviceCommandHandler :
         CommandHandler<ProvisionDeviceCommand>,
         IRequestHandler<ProvisionDeviceCommand, string>
@@ -25,7 +30,6 @@ namespace ElementIoT.Silicon.Handler.Command
         #endregion
 
         #region Constructors
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ProvisionDeviceCommandHandler" /> class.
@@ -72,14 +76,14 @@ namespace ElementIoT.Silicon.Handler.Command
                 var entity = Map(command);
 
                 // Persist the entity with the repository.
-                await this.DeviceRepository.SaveDevice(entity);
+                await this.DeviceRepository.ProvisionDevice(entity);
 
                 // Notify that the command was handled.
                 await this.EventBus.Publish(ProvisionDeviceEvent.FromEntity(entity));
             }
             catch(Exception ex)
             {
-                base.HandleError(ex, command);
+                throw base.HandleError(ex, command);
             }
         }
 
@@ -88,7 +92,7 @@ namespace ElementIoT.Silicon.Handler.Command
         #region Helper Functions
 
         /// <summary>
-        /// Maps from command entity to corresponding repository entity.
+        /// Maps from command entity to corresponding domain entity.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -96,14 +100,14 @@ namespace ElementIoT.Silicon.Handler.Command
         {
             Device entity = new Device
             {
-                HubID = command.DeviceID,
+                DeviceID = command.DeviceID,
                 Name = command.DeviceName,
+                Description = command.DeviceDescription,
                 DeviceType = new DeviceType {
-                    Key = command.DeviceTypeKey,
-                    DeviceTypeID = command.DeviceTypeID
-                },
-                ParentDevice = new Device { HubID = command.PrentDeviceID },
-                IsRoot = command.IsMaster
+                    Key = command.DeviceTypeKey
+                },               
+                IsRoot = command.IsRoot,
+                IsEnabled = command.IsEnabled
             };
 
             return entity;

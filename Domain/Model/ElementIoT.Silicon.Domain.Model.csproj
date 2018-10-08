@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="ElementIoT.Particle.Infrastructure.Model" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Utility" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="5.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>

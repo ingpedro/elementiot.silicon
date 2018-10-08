@@ -4,4 +4,15 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="ElementIoT.Particle.Operational.Error" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Logging" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Azure.Devices" Version="1.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Resource\Messages\ElementIoT.Silicon.Resource.Messages.csproj" />
+  </ItemGroup>
+
 </Project>
