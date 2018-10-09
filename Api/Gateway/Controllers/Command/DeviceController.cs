@@ -61,7 +61,7 @@ namespace ElementIoT.Silicon.Api.Gateway.Controllers.Command
         /// <summary>
         /// Provisions a new device in the platform.
         /// </summary>
-        /// <param name="command">The command.</param>
+        /// <param name="command">The provision device command.</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(202)]

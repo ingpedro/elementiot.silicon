@@ -39,7 +39,7 @@ namespace ElementIoT.Silicon.Handler.Command
         /// <param name="eventBus">The event bus.</param>
         /// <param name="deviceRepository">The device repository.</param>
         public ProvisionDeviceCommandHandler(ILogPolicy logService, IErrorPolicy errorService, IEventBus eventBus, IDeviceRepository deviceRepository)
-            :base(logService, errorService, eventBus)
+            : base(logService, errorService, eventBus)
         {
             this.DeviceRepository = deviceRepository;
         }
@@ -81,7 +81,7 @@ namespace ElementIoT.Silicon.Handler.Command
                 // Notify that the command was handled.
                 await this.EventBus.Publish(ProvisionDeviceEvent.FromEntity(entity));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw base.HandleError(ex, command);
             }
@@ -98,16 +98,22 @@ namespace ElementIoT.Silicon.Handler.Command
         /// <returns></returns>
         private Device Map(ProvisionDeviceCommand command)
         {
+            DeviceIdentity identity = new DeviceIdentity();
+            identity.GenerateHubKey();
+
             Device entity = new Device
             {
+                Identity = identity,
                 DeviceID = command.DeviceID,
                 Name = command.DeviceName,
                 Description = command.DeviceDescription,
-                DeviceType = new DeviceType {
+                DeviceType = new DeviceType
+                {
                     Key = command.DeviceTypeKey
-                },               
+                },
                 IsRoot = command.IsRoot,
-                IsEnabled = command.IsEnabled
+                IsEnabled = command.IsEnabled,
+                CreatedBy = command.SenderIdentity
             };
 
             return entity;

@@ -60,7 +60,7 @@ namespace ElementIoT.Silicon.Repository.Command
         public async Task<Device> ProvisionDevice(Device entity)
         {
             // Provision the device in the IoT Hub, to generate the Hub ID and Auth properties
-            entity = await this.IoTDeviceProvider.ProvisionDevice(entity);
+            // entity = await this.IoTDeviceProvider.ProvisionDevice(entity);
 
             // Provision the device in the platform's database
             entity = await this.SqlDeviceProvider.ProvisionDevice(entity);

@@ -56,9 +56,8 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
             this.LogService = logService;
 
             //set connection string
-            var dbKey = ConfigService[DB_CONNECTION_KEY];
-            if (!string.IsNullOrWhiteSpace(dbKey)) {
-                this.ConnectionString = ConfigService[dbKey];               
+            if (!string.IsNullOrWhiteSpace(ConfigService[DB_CONNECTION_KEY])) {
+                this.ConnectionString = ConfigService[DB_CONNECTION_KEY];               
             }
             else
             {

@@ -7,27 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ElementIoT.Particle.Infrastructure.Model" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Error" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Logging" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Resource" Version="1.0.0" />
     <PackageReference Include="MediatR" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
     <ProjectReference Include="..\..\Repository\Command\ElementIoT.Silicon.Repository.Command.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ElementIoT.Particle.Infrastructure.Model">
-      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="ElementIoT.Particle.Infrastructure.Processor">
-      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Infrastructure.Processor.dll</HintPath>
-    </Reference>
-    <Reference Include="ElementIoT.Particle.Operational.Error">
-      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Operational.Error.dll</HintPath>
-    </Reference>
-    <Reference Include="ElementIoT.Particle.Operational.Logging">
-      <HintPath>..\..\..\lib\Particle\ElementIoT.Particle.Operational.Logging.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

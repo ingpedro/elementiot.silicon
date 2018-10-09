@@ -24,6 +24,8 @@ using ElementIoT.Silicon.Handler.Command;
 using ElementIoT.Silicon.Handler.Event;
 using CRepository = ElementIoT.Silicon.Repository.Command;
 using QRepository = ElementIoT.Silicon.Repository.Query;
+using IoTProvider = ElementIoT.Silicon.DataProvider.IoTHubProvider;
+using SqlProvider = ElementIoT.Silicon.DataProvider.SqlProvider;
 
 namespace ElementIoT.Silicon.Api.Gateway
 {
@@ -71,7 +73,7 @@ namespace ElementIoT.Silicon.Api.Gateway
                 {
                     Title = "Element IoT - Device API",
                     Version = "v1",
-                    Description = "Endpooints for managing devices."
+                    Description = "Endpoints for managing devices."
                 });
 
                 // Set the comments path for the Swagger JSON and UI.
@@ -87,6 +89,10 @@ namespace ElementIoT.Silicon.Api.Gateway
             // Operational
             services.AddScoped<ILogPolicy, DevLogPolicy>();
             services.AddScoped<IErrorPolicy, ApiErrorPolicy>();
+
+            // Data Providers
+            services.AddScoped<IoTProvider.IDeviceDataProvider, IoTProvider.DeviceDataProvider>();
+            services.AddScoped<SqlProvider.IDeviceDataProvider, SqlProvider.DeviceDataProvider>();
 
             // Repositories
             services.AddScoped<CRepository.IDeviceRepository, CRepository.DeviceRepository>();
