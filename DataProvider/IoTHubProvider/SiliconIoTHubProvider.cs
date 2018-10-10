@@ -55,10 +55,9 @@ namespace ElementIoT.Silicon.DataProvider.IoTHubProvider
             this.LogService = logService;
 
             //set connection string
-            var iotHubKey = ConfigService[IOTHUB_CONNECTION_KEY];
-            if (!string.IsNullOrWhiteSpace(iotHubKey))
+            if (!string.IsNullOrWhiteSpace(ConfigService[IOTHUB_CONNECTION_KEY]))
             {
-                this.ConnectionString = ConfigService[iotHubKey];
+                this.ConnectionString = ConfigService[IOTHUB_CONNECTION_KEY];
             }
             else
             {

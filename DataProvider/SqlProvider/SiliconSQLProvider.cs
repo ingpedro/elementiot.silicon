@@ -56,15 +56,16 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
             this.LogService = logService;
 
             //set connection string
-            if (!string.IsNullOrWhiteSpace(ConfigService[DB_CONNECTION_KEY])) {
-                this.ConnectionString = ConfigService[DB_CONNECTION_KEY];               
+            if (!string.IsNullOrWhiteSpace(ConfigService[DB_CONNECTION_KEY]))
+            {
+                this.ConnectionString = ConfigService[DB_CONNECTION_KEY];
             }
             else
             {
                 throw new IoTException(ErrorMessages.DataProvider_ConnectionStringKeyMissing, ErrorReasonTypeEnum.Configuration);
             }
 
-            
+
         }
 
         #endregion
@@ -86,6 +87,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
 
                     return await connection.ExecuteAsync(command);
                 }
+            }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
             }
             catch (Exception ex)
             {
@@ -111,6 +118,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
 
                     return await connection.QuerySingleOrDefaultAsync<T>(command);
                 }
+            }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
             }
             catch (Exception ex)
             {
@@ -142,6 +155,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
 
                 return results;
             }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
+            }
             catch (Exception ex)
             {
                 LogService.LogError(new LogEntry() { Error = ex });
@@ -171,6 +190,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
                 }
 
                 return results.Select(r => converter(results));
+            }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
             }
             catch (Exception ex)
             {
@@ -207,6 +232,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
 
                 return results;
             }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
+            }
             catch (Exception ex)
             {
                 LogService.LogError(new LogEntry() { Error = ex });
@@ -227,6 +258,12 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider
                 multiResultReader = await connection.QueryMultipleAsync(command);
 
                 return multiResultReader;
+            }
+            catch (SqlException ex)
+            {
+                LogService.LogError(new LogEntry() { Error = ex });
+
+                throw;
             }
             catch (Exception ex)
             {
