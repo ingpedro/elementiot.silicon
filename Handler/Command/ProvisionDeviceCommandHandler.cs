@@ -82,11 +82,13 @@ namespace ElementIoT.Silicon.Handler.Command
                 await this.EventBus.Publish(ProvisionDeviceEvent.FromEntity(entity));
             }
             catch (Exception ex)
-            {
+            {                
+                await this.EventBus.Publish(new CommandFailedEvent(command));
+
                 throw base.HandleError(ex, command);
             }
         }
-
+        
         #endregion
 
         #region Helper Functions
