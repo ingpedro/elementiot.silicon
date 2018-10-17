@@ -13,7 +13,7 @@ namespace ElementIoT.Silicon.Domain.Model.Command
     /// </summary>
     /// <seealso cref="ElementIoT.Particle.Infrastructure.Model.Messaging.MessagingCommand" />
     /// <seealso cref="MediatR.IRequest{System.String}" />
-    public class ProvisionDeviceCommand : MessagingCommand, IRequest<string>
+    public class ProvisionDeviceCommand : MessagingCommand, IRequest<string>, IValidatableObject
     {
         #region Fields
         #endregion
@@ -95,12 +95,25 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         public ProvisionDeviceCommand() 
             : base()
         {
-
         }
 
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Determines whether the specified object is valid.
+        /// </summary>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>
+        /// A collection that holds failed-validation information.
+        /// </returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

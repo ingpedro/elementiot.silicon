@@ -2,8 +2,10 @@
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
-using IoTHubProvider = ElementIoT.Silicon.DataProvider.IoTHubProvider;
-using SqlProvider = ElementIoT.Silicon.DataProvider.SqlProvider;
+using IoTCHubProvider = ElementIoT.Silicon.DataProvider.IoTHubProvider.Command;
+using SqlCProvider = ElementIoT.Silicon.DataProvider.SqlProvider.Command;
+using CacheCProvider = ElementIoT.Silicon.DataProvider.CacheProvider.Command;
+using CacheQProvider = ElementIoT.Silicon.DataProvider.CacheProvider.Query;
 using Microsoft.Extensions.Configuration;
 using ElementIoT.Particle.Operational.Error;
 using ElementIoT.Particle.Operational.Logging;
@@ -22,10 +24,16 @@ namespace ElementIoT.Silicon.Repository.Command
 
         #region Properties
 
-        IoTHubProvider.IDeviceDataProvider IoTDeviceProvider
+        IoTCHubProvider.IDeviceCommandDataProvider IoTDeviceProvider
         { get; }
 
-        SqlProvider.IDeviceDataProvider SqlDeviceProvider
+        SqlCProvider.IDeviceCommandDataProvider SqlDeviceProvider
+        { get; }
+
+        CacheCProvider.IDeviceCommandDataProvider CacheCommandProvider
+        { get; }
+
+        CacheQProvider.IDeviceQueryDataProvider CacheQueryProvider
         { get; }
 
         #endregion
@@ -39,13 +47,18 @@ namespace ElementIoT.Silicon.Repository.Command
         /// <param name="errorService">The error service.</param>
         /// <param name="logService">The log service.</param>
         /// <param name="deviceIdentityProvider">The device identity provider.</param>
-        /// <param name="deviceProvider">The device provider.</param>
+        /// <param name="sqlCommandProvider">The device provider.</param>
         public DeviceRepository(IConfiguration configService, IErrorPolicy errorService, ILogPolicy logService,
-                                IoTHubProvider.IDeviceDataProvider deviceIdentityProvider, SqlProvider.IDeviceDataProvider deviceProvider)
+                                IoTCHubProvider.IDeviceCommandDataProvider deviceIdentityProvider, 
+                                SqlCProvider.IDeviceCommandDataProvider sqlCommandProvider, 
+                                CacheCProvider.IDeviceCommandDataProvider cacheCommandProvider,
+                                CacheQProvider.IDeviceQueryDataProvider cacheQueryProvider)
             : base(configService, errorService, logService)
         {
             this.IoTDeviceProvider = deviceIdentityProvider;
-            this.SqlDeviceProvider = deviceProvider;
+            this.SqlDeviceProvider = sqlCommandProvider;
+            this.CacheCommandProvider = cacheCommandProvider;
+            this.CacheQueryProvider = cacheQueryProvider;
         }
 
         #endregion
@@ -64,6 +77,9 @@ namespace ElementIoT.Silicon.Repository.Command
 
             // Provision the device in the platform's database
             entity = await this.SqlDeviceProvider.ProvisionDevice(entity);
+
+            // Provision the device in the platform's cache
+            entity = await this.CacheCommandProvider.SaveDevice(entity);
 
             return entity;
         }

@@ -1,9 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>ElementIoT.Silicon.DataProvider.CacheProvider</AssemblyName>
     <RootNamespace>ElementIoT.Silicon.DataProvider.CacheProvider</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ElementIoT.Particle.Operational.Caching" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Error" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Logging" Version="1.0.0" />
+    <PackageReference Include="ElementIoT.Particle.Operational.Resource" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+  </ItemGroup>
 
 </Project>

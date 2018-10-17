@@ -97,6 +97,33 @@ namespace ElementIoT.Silicon.Resource.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A device with the given Device ID has already been privisioned..
+        /// </summary>
+        public static string ProvisionDevice_DeviceExists {
+            get {
+                return ResourceManager.GetString("ProvisionDevice_DeviceExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The command is missing..
+        /// </summary>
+        public static string Service_CommandMissing {
+            get {
+                return ResourceManager.GetString("Service_CommandMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The service validation failed..
+        /// </summary>
+        public static string Service_ValidationFailed {
+            get {
+                return ResourceManager.GetString("Service_ValidationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The device identifier use by the client is missing.
         /// </summary>
         public static string Validation_DeviceIDMissing {

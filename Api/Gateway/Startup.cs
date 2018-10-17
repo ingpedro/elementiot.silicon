@@ -24,8 +24,8 @@ using ElementIoT.Silicon.Handler.Command;
 using ElementIoT.Silicon.Handler.Event;
 using CRepository = ElementIoT.Silicon.Repository.Command;
 using QRepository = ElementIoT.Silicon.Repository.Query;
-using IoTProvider = ElementIoT.Silicon.DataProvider.IoTHubProvider;
-using SqlProvider = ElementIoT.Silicon.DataProvider.SqlProvider;
+using IoTCProvider = ElementIoT.Silicon.DataProvider.IoTHubProvider.Command;
+using SqlCProvider = ElementIoT.Silicon.DataProvider.SqlProvider.Command;
 
 namespace ElementIoT.Silicon.Api.Gateway
 {
@@ -91,8 +91,8 @@ namespace ElementIoT.Silicon.Api.Gateway
             services.AddScoped<IErrorPolicy, ApiErrorPolicy>();
 
             // Data Providers
-            services.AddScoped<IoTProvider.IDeviceDataProvider, IoTProvider.DeviceDataProvider>();
-            services.AddScoped<SqlProvider.IDeviceDataProvider, SqlProvider.DeviceDataProvider>();
+            services.AddScoped<IoTCProvider.IDeviceCommandDataProvider, IoTCProvider.DeviceDataProvider>();
+            services.AddScoped<SqlCProvider.IDeviceCommandDataProvider, SqlCProvider.DeviceDataProvider>();
 
             // Repositories
             services.AddScoped<CRepository.IDeviceRepository, CRepository.DeviceRepository>();

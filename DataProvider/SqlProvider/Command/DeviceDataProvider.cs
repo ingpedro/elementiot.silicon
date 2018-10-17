@@ -10,13 +10,13 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementIoT.Silicon.DataProvider.SqlProvider
+namespace ElementIoT.Silicon.DataProvider.SqlProvider.Command
 {
     /// <summary>
     /// Data Provider resposible for handling the data actions for Devices using SQL.
     /// </summary>
     /// <seealso cref="ElementIoT.Silicon.DataProvider.SqlProvider.SiliconSQLProvider" />
-    public class DeviceDataProvider : SiliconSQLProvider, IDeviceDataProvider
+    public class DeviceDataProvider : SiliconSQLProvider, IDeviceCommandDataProvider
     {
         #region Fields
         #endregion

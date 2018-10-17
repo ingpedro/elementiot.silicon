@@ -70,9 +70,9 @@ namespace ElementIoT.Silicon.Api.Gateway.Controllers.Command
         public async Task<IActionResult> ProvisionDevice([FromBody]ProvisionDeviceCommand command)
         {
             try
-            {
+            {                
                 // Check the model state and validate the integrity of the data
-                if (command != null && ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     await this.DeviceService.ProvisionDevice(command);
 

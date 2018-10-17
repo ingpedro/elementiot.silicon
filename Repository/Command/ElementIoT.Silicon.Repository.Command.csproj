@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ElementIoT.Particle.Operational.Caching" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataProvider\CacheProvider\ElementIoT.Silicon.DataProvider.CacheProvider.csproj" />
     <ProjectReference Include="..\..\DataProvider\IoTHubProvider\ElementIoT.Silicon.DataProvider.IoTHubProvider.csproj" />
     <ProjectReference Include="..\..\DataProvider\SqlProvider\ElementIoT.Silicon.DataProvider.SqlProvider.csproj" />
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Common.Exceptions;
 using ElementIoT.Silicon.Resource.Messages;
 
-namespace ElementIoT.Silicon.DataProvider.IoTHubProvider
+namespace ElementIoT.Silicon.DataProvider.IoTHubProvider.Command
 {
-    public class DeviceDataProvider : SiliconIoTHubProvider, IDeviceDataProvider
+    public class DeviceDataProvider : SiliconIoTHubProvider, IDeviceCommandDataProvider
     {
         #region Fields        
         #endregion

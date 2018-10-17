@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataProvider\CacheProvider\ElementIoT.Silicon.DataProvider.CacheProvider.csproj" />
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
     <ProjectReference Include="..\..\Handler\Command\ElementIoT.Silicon.Handler.Command.csproj" />
   </ItemGroup>
