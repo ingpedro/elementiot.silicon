@@ -46,53 +46,46 @@ namespace ElementIoT.Silicon.DataProvider.IoTHubProvider.Command
         /// <exception cref="IoTException"></exception>
         public async Task<DomainEntity.Device> ProvisionDevice(DomainEntity.Device entity)
         {
-            using (RegistryManager registryManager = RegistryManager.CreateFromConnectionString(this.ConnectionString))
+            try
             {
-                bool isProvisioned = false;
-                int attempts = 0;
+                if (entity == null)
+                    throw new ArgumentNullException(ErrorMessages.Validation_DeviceEntityMissing, "Device");
 
-                // Attept to provision the device up to 'ProvisioningAttepts' times
-                while (!isProvisioned && ++attempts <= this.ProvisioningAttempts)
+                if (entity.Identity == null)
+                    throw new ArgumentNullException(ErrorMessages.Validation_DeviceIdentityMissing, "Device Identity");
+
+                using (RegistryManager registryManager = RegistryManager.CreateFromConnectionString(this.ConnectionString))
                 {
+                    Device device;
+
                     try
                     {
-                        Device device;
-
                         entity.Identity.GenerateHubKey();
+
                         device = await registryManager.AddDeviceAsync(new Device(entity.Identity.HubID));
-
-                        // Set the provisioned device identity's properties from the IoT Hub into the domain Device
-                        entity.Identity.IsConnected = device.ConnectionState == DeviceConnectionState.Connected;
-                        entity.Identity.IsEnabled = device.Status == DeviceStatus.Enabled;
-
-                        entity.Identity.Authentication = new DomainEntity.DeviceAuthentication
-                        {
-                            PrimaryKey = device.Authentication.SymmetricKey.PrimaryKey,
-                            SecondaryKey = device.Authentication.SymmetricKey.SecondaryKey
-                        };
-
-                        isProvisioned = true;
                     }
-                    catch (DeviceAlreadyExistsException ex)
+                    catch (DeviceAlreadyExistsException)
                     {
-                        var log = new LogEntry(InfoMessages.IoTHubProvider_DeviceHubIdAlreadyExists)
-                        {
-                            Arguments = new { entity.Identity.HubID },
-                            Error = ex
-                        };
-
-                        this.LogService.LogInfo(log);
+                        device = await registryManager.GetDeviceAsync(entity.Identity.HubID);
                     }
+
+                    // Set the provisioned device identity's properties from the IoT Hub into the domain Device
+                    entity.Identity.IsConnected = device.ConnectionState == DeviceConnectionState.Connected;
+                    entity.Identity.IsEnabled = device.Status == DeviceStatus.Enabled;
+
+                    entity.Identity.Authentication = new DomainEntity.DeviceAuthentication
+                    {
+                        PrimaryKey = device.Authentication.SymmetricKey.PrimaryKey,
+                        SecondaryKey = device.Authentication.SymmetricKey.SecondaryKey
+                    };
                 }
 
-                // If the proviosioning failed, throw an exception with the error.
-                if (!isProvisioned)
-                {
-                    throw new IoTException(ErrorMessages.IoTHubProvider_ProvisionDeviceIdentityFailed);
-                }
+                return entity;
             }
-
-            return entity;
+            catch (Exception ex)
+            {
+                throw new IoTException(ErrorMessages.ProvisionDevice_IoTProviderUnexpected, ex, ErrorReasonTypeEnum.DataProvider);
+            }
         }
 
         #endregion

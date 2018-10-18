@@ -129,14 +129,29 @@
   <data name="IoTHubProvider_ProvisionDeviceIdentityFailed" xml:space="preserve">
     <value>The provisioing of the device failed while trying to add it to the IoT Hub</value>
   </data>
+  <data name="ProvisionDevice_CacheProviderUnexpected" xml:space="preserve">
+    <value>There was an unexpected error while trying to save the device in the cache</value>
+  </data>
   <data name="ProvisionDevice_DeviceExists" xml:space="preserve">
     <value>A device with the given Device ID has already been privisioned.</value>
+  </data>
+  <data name="ProvisionDevice_IoTProviderUnexpected" xml:space="preserve">
+    <value>There was an unexpected error while trying to provision the device in the IoT Hub</value>
+  </data>
+  <data name="ProvisionDevice_SqlProviderUnexpected" xml:space="preserve">
+    <value>There was an unexpected error while trying to provision the device in the Platform Database</value>
   </data>
   <data name="Service_CommandMissing" xml:space="preserve">
     <value>The command is missing.</value>
   </data>
   <data name="Service_ValidationFailed" xml:space="preserve">
     <value>The service validation failed.</value>
+  </data>
+  <data name="Validation_DeviceEntityMissing" xml:space="preserve">
+    <value>The Device entity is missing</value>
+  </data>
+  <data name="Validation_DeviceIdentityMissing" xml:space="preserve">
+    <value>The Device identity is missing</value>
   </data>
   <data name="Validation_DeviceIDMissing" xml:space="preserve">
     <value>The device identifier use by the client is missing</value>

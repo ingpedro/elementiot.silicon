@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Resource\Messages\ElementIoT.Silicon.Resource.Messages.csproj" />
   </ItemGroup>
 
 </Project>

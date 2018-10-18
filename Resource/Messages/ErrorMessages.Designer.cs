@@ -97,11 +97,38 @@ namespace ElementIoT.Silicon.Resource.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an unexpected error while trying to save the device in the cache.
+        /// </summary>
+        public static string ProvisionDevice_CacheProviderUnexpected {
+            get {
+                return ResourceManager.GetString("ProvisionDevice_CacheProviderUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A device with the given Device ID has already been privisioned..
         /// </summary>
         public static string ProvisionDevice_DeviceExists {
             get {
                 return ResourceManager.GetString("ProvisionDevice_DeviceExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an unexpected error while trying to provision the device in the IoT Hub.
+        /// </summary>
+        public static string ProvisionDevice_IoTProviderUnexpected {
+            get {
+                return ResourceManager.GetString("ProvisionDevice_IoTProviderUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an unexpected error while trying to provision the device in the Platform Database.
+        /// </summary>
+        public static string ProvisionDevice_SqlProviderUnexpected {
+            get {
+                return ResourceManager.GetString("ProvisionDevice_SqlProviderUnexpected", resourceCulture);
             }
         }
         
@@ -120,6 +147,24 @@ namespace ElementIoT.Silicon.Resource.Messages {
         public static string Service_ValidationFailed {
             get {
                 return ResourceManager.GetString("Service_ValidationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Device entity is missing.
+        /// </summary>
+        public static string Validation_DeviceEntityMissing {
+            get {
+                return ResourceManager.GetString("Validation_DeviceEntityMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Device identity is missing.
+        /// </summary>
+        public static string Validation_DeviceIdentityMissing {
+            get {
+                return ResourceManager.GetString("Validation_DeviceIdentityMissing", resourceCulture);
             }
         }
         

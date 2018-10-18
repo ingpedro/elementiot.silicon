@@ -6,6 +6,7 @@ using ElementIoT.Particle.Operational.Caching;
 using ElementIoT.Particle.Operational.Error;
 using ElementIoT.Particle.Operational.Logging;
 using ElementIoT.Silicon.Domain.Model.Entity;
+using ElementIoT.Silicon.Resource.Messages;
 using Microsoft.Extensions.Configuration;
 
 namespace ElementIoT.Silicon.DataProvider.CacheProvider.Command
@@ -67,7 +68,18 @@ namespace ElementIoT.Silicon.DataProvider.CacheProvider.Command
         /// <returns></returns>
         public async Task<Device> SaveDevice(Device entity)
         {
-           return await Task.FromResult(this.CacheService.Set(this.cacheScope, entity.DeviceID, entity));
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException(ErrorMessages.Validation_DeviceEntityMissing, "Device");
+
+                return await Task.FromResult(this.CacheService.Set(this.cacheScope, entity.DeviceID, entity));
+            }
+            catch (Exception ex)
+            {
+                throw new IoTException(ErrorMessages.ProvisionDevice_CacheProviderUnexpected, ex, ErrorReasonTypeEnum.DataProvider);
+            }
+
         }
 
         #endregion

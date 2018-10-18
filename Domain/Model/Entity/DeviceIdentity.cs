@@ -10,7 +10,7 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
     /// Defines a type that represents a device identity from the IoT Hub
     /// </summary>
     /// <seealso cref="ElementIoT.Particle.Infrastructure.Model.ValueObject" />
-    public class DeviceIdentity: ValueObject
+    public class DeviceIdentity : ValueObject
     {
         #region Fields
         #endregion
@@ -70,7 +70,7 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         /// Initializes a new instance of the <see cref="DeviceIdentity"/> class.
         /// </summary>
         public DeviceIdentity()
-            :base()
+            : base()
         {
             this.Tags = new List<string>();
         }
@@ -85,7 +85,8 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         /// <returns>The generated key.</returns>
         public string GenerateHubKey()
         {
-            this.HubID = KeyGenUtility.GenerateBase64Key();
+            if (string.IsNullOrWhiteSpace(this.HubID))
+                this.HubID = KeyGenUtility.GenerateBase64Key();
 
             return this.HubID;
         }

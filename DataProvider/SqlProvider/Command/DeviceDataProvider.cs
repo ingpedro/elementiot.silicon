@@ -49,43 +49,46 @@ namespace ElementIoT.Silicon.DataProvider.SqlProvider.Command
         /// <returns></returns>
         public async Task<Device> ProvisionDevice(Device entity)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            try
+            {
+                if (entity == null)
+                    throw new ArgumentNullException(ErrorMessages.Validation_DeviceEntityMissing, "Device");
 
-            if (entity.Identity == null)
-                throw new ArgumentNullException(nameof(entity));
+                if (entity.Identity == null)
+                    throw new ArgumentNullException(ErrorMessages.Validation_DeviceIdentityMissing, "Device Identity");
 
-            var parameters = new DynamicParameters();
+                if (string.IsNullOrWhiteSpace(entity.Identity.HubID))
+                    throw new ArgumentException(ErrorMessages.Validation_HubIDMissing, "Hub ID");
 
-            if(!string.IsNullOrWhiteSpace(entity.Identity.HubID))
+                if (string.IsNullOrWhiteSpace(entity.DeviceID))
+                    throw new ArgumentException(ErrorMessages.Validation_DeviceIDMissing, "Device ID");
+
+                if (entity.DeviceType == null || entity.DeviceType.Key == default(Guid))
+                    throw new ArgumentException(ErrorMessages.Validation_DeviceTypeKeyMissing, "Device Type Key");
+
+                var parameters = new DynamicParameters();
+
                 parameters.Add("@HubID", entity.Identity.HubID, DbType.String, ParameterDirection.Input);
-            else
-                throw new ArgumentException(ErrorMessages.Validation_HubIDMissing, "Hub ID");
-
-            if (!string.IsNullOrWhiteSpace(entity.DeviceID))
                 parameters.Add("@DeviceID", entity.DeviceID, DbType.String, ParameterDirection.Input);
-            else
-                throw new ArgumentException(ErrorMessages.Validation_DeviceIDMissing, "Device ID");
-
-            if (entity.DeviceType != null && entity.DeviceType.Key != default(Guid))
                 parameters.Add("@DeviceTypeKey", entity.DeviceType.Key, DbType.Guid, ParameterDirection.Input);
-            else
-                throw new ArgumentException(ErrorMessages.Validation_DeviceTypeKeyMissing, "Device Type Key");
+                parameters.Add("@Name", entity.Name, DbType.String, ParameterDirection.Input);
+                parameters.Add("@Description", entity.Description, DbType.String, ParameterDirection.Input);
+                parameters.Add("@IsRoot", entity.IsRoot, DbType.Boolean, ParameterDirection.Input);
+                parameters.Add("@IsEnabled", entity.IsEnabled, DbType.Boolean, ParameterDirection.Input);
+                parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String, ParameterDirection.Input);
 
-            parameters.Add("@Name", entity.Name, DbType.String, ParameterDirection.Input);
-            parameters.Add("@Description", entity.Description, DbType.String, ParameterDirection.Input);
-            parameters.Add("@IsRoot", entity.IsRoot, DbType.Boolean, ParameterDirection.Input);
-            parameters.Add("@IsEnabled", entity.IsEnabled, DbType.Boolean, ParameterDirection.Input);
+                var procedure = "[Device].[USPCreateDevice]";
 
-            parameters.Add("@CreatedBy", entity.CreatedBy, DbType.String, ParameterDirection.Input);
+                CommandDefinition command = new CommandDefinition(procedure, parameters: parameters, commandType: CommandType.StoredProcedure);
 
-            var procedure = "[Device].[USPCreateDevice]";
+                await this.ExecuteAsync(command);
 
-            CommandDefinition command = new CommandDefinition(procedure, parameters: parameters, commandType: CommandType.StoredProcedure);
-
-            await this.ExecuteAsync(command);
-
-            return entity;
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new IoTException(ErrorMessages.ProvisionDevice_IoTProviderUnexpected, ex, ErrorReasonTypeEnum.DataProvider);
+            }
         }
 
         #endregion

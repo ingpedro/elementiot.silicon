@@ -22,9 +22,6 @@ namespace ElementIoT.Silicon.Service.Command
 
         #region Properties
 
-        protected CacheQProvider.IDeviceQueryDataProvider CacheQueryProvider
-        { get; }
-
         #endregion
 
         #region Constructors
@@ -33,12 +30,9 @@ namespace ElementIoT.Silicon.Service.Command
         /// Initializes a new instance of the <see cref="DeviceService" /> class.
         /// </summary>
         /// <param name="commandBus">The command bus.</param>
-        /// <param name="cacheQueryProvider">The cache query provider.</param>
-        public DeviceService(ICommandBus commandBus,
-                             CacheQProvider.IDeviceQueryDataProvider cacheQueryProvider)
+        public DeviceService(ICommandBus commandBus)
             : base(commandBus)
         {
-            this.CacheQueryProvider = cacheQueryProvider;
         }
 
         #endregion
@@ -54,28 +48,8 @@ namespace ElementIoT.Silicon.Service.Command
         {
             // Do some business validation here. Make calls to the Query side to get additional domain info.           
 
-            this.ProvisionDeviceValidate(command);
-
             // Send the command to the command bus
             await this.CommandBus.Send(command);
-        }
-
-
-        public void ProvisionDeviceValidate(ProvisionDeviceCommand command)
-        {
-            List<string> commandErrors = new List<string>();
-
-            Device existingDevice = this.CacheQueryProvider.GetDevice(command.DeviceID).Result;
-
-            if (existingDevice != null)
-            {
-                commandErrors.Add(ErrorMessages.ProvisionDevice_DeviceExists);
-            }
-
-            if (commandErrors.Count > 0)
-            {
-                throw new IoTException(ErrorMessages.Service_ValidationFailed, ErrorReasonTypeEnum.Validation, commandErrors.ToArray());
-            }
         }
 
         #endregion

@@ -14,12 +14,5 @@ namespace ElementIoT.Silicon.Service.Command
         /// <param name="command">The command.</param>
         /// <returns></returns>
         Task ProvisionDevice(ProvisionDeviceCommand command);
-
-        /// <summary>
-        /// Executes the business validation rules for provisioning a device
-        /// </summary>
-        /// <param name="command">The command.</param>
-        /// <returns></returns>
-        void ProvisionDeviceValidate(ProvisionDeviceCommand command);
     }
 }
