@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataProvider\CacheProvider\ElementIoT.Silicon.DataProvider.CacheProvider.csproj" />
+    <ProjectReference Include="..\..\DataProvider\SqlProvider\ElementIoT.Silicon.DataProvider.SqlProvider.csproj" />
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
   </ItemGroup>
 

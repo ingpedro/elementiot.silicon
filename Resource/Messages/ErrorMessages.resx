@@ -126,6 +126,9 @@
   <data name="DataProvider_PrimaryKeyWasNotReturned" xml:space="preserve">
     <value>The primary key was not returned by the procedure</value>
   </data>
+  <data name="GetDevice_SqlProviderUnexpected" xml:space="preserve">
+    <value>There was an unexpected error while trting to get the device.</value>
+  </data>
   <data name="IoTHubProvider_ProvisionDeviceIdentityFailed" xml:space="preserve">
     <value>The provisioing of the device failed while trying to add it to the IoT Hub</value>
   </data>

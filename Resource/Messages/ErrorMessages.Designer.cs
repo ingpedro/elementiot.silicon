@@ -88,6 +88,15 @@ namespace ElementIoT.Silicon.Resource.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an unexpected error while trting to get the device..
+        /// </summary>
+        public static string GetDevice_SqlProviderUnexpected {
+            get {
+                return ResourceManager.GetString("GetDevice_SqlProviderUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The provisioing of the device failed while trying to add it to the IoT Hub.
         /// </summary>
         public static string IoTHubProvider_ProvisionDeviceIdentityFailed {

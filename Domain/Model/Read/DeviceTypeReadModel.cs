@@ -23,8 +23,8 @@ namespace ElementIoT.Silicon.Domain.Model.Read
         /// <value>
         /// The identifier.
         /// </value>
-        [JsonProperty("id")]
-        public string ID
+        [JsonProperty("deviceTypeID")]
+        public string DeviceTypeID
         { get; set; }
 
         /// <summary>
@@ -35,6 +35,16 @@ namespace ElementIoT.Silicon.Domain.Model.Read
         /// </value>
         [JsonProperty("name")]
         public string Name
+        { get; set; }
+
+        /// <summary>
+        /// Gets or sets the description of the device.
+        /// </summary>
+        /// <value>
+        /// The description.
+        /// </value>
+        [JsonProperty("description")]
+        public string Description
         { get; set; }
 
         #endregion

@@ -17,8 +17,4 @@
     <ProjectReference Include="..\..\Resource\Messages\ElementIoT.Silicon.Resource.Messages.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Query\" />
-  </ItemGroup>
-
 </Project>

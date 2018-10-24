@@ -1,4 +1,5 @@
 ﻿using ElementIoT.Particle.Infrastructure.Model;
+using ElementIoT.Silicon.Domain.Model.Read;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
     /// Defines a type that represents a device with its platform and field properties
     /// </summary>
     /// <seealso cref="AggregateRoot" />
-    public class Device: AggregateRoot
+    public class Device : AggregateRoot
     {
         #region Fields
 
@@ -106,6 +107,23 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         #endregion
 
         #region Methods
+
+        public DeviceReadModel ToReadModel()
+        {
+            return new DeviceReadModel
+            {
+                Key = this.Key,
+                DeviceID = this.DeviceID,
+                Name = this.Name,
+                Description = this.Description,
+
+                DeviceType = this.DeviceType.ToReadModel(),
+
+                IsRoot = this.IsRoot,
+                IsEnabled = this.IsEnabled,
+            };
+        }
+
         #endregion
     }
 }

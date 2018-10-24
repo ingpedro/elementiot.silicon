@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ElementIoT.Silicon.DataProvider.CacheProvider.Query
 {
-    public class DeviceDataProvider : SiliconCacheProvider
+    public class DeviceDataProvider : SiliconCacheProvider, IDeviceQueryDataProvider
     {
         #region Fields
 

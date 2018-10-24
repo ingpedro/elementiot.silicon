@@ -1,19 +1,49 @@
-﻿using ElementIoT.Silicon.Domain.Model.Read;
+﻿using ElementIoT.Particle.Operational.Error;
+using ElementIoT.Particle.Operational.Logging;
+using ElementIoT.Silicon.Domain.Model.Read;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using SqlQProvider = ElementIoT.Silicon.DataProvider.SqlProvider.Query;
+using CacheQProvider = ElementIoT.Silicon.DataProvider.CacheProvider.Query;
+using ElementIoT.Silicon.Domain.Model.Entity;
 
 namespace ElementIoT.Silicon.Repository.Query
 {
-    public class DeviceRepository : IDeviceRepository
+    public class DeviceRepository : SiliconRepository, IDeviceRepository
     {
         #region Fields
         #endregion
 
         #region Properties
+
+        protected SqlQProvider.IDeviceQueryDataProvider SqlQueryProvider
+        { get; }
+
+        public CacheQProvider.IDeviceQueryDataProvider CacheQueryProvider
+        { get; }
+
         #endregion
 
         #region Constructors        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeviceRepository" /> class.
+        /// </summary>
+        /// <param name="configService">The configuration service.</param>
+        /// <param name="errorService">The error service.</param>
+        /// <param name="logService">The log service.</param>
+        /// <param name="sqlQueryProvider">The SQL query provider.</param>
+        /// <param name="cacheQueryProvider">The cache query provider.</param>
+        public DeviceRepository(IConfiguration configService, IErrorPolicy errorService, ILogPolicy logService,
+                                SqlQProvider.IDeviceQueryDataProvider sqlQueryProvider,
+                                CacheQProvider.IDeviceQueryDataProvider cacheQueryProvider)
+            : base(configService, errorService, logService)
+        {
+            this.SqlQueryProvider = sqlQueryProvider;
+            this.CacheQueryProvider = cacheQueryProvider;
+        }
 
         #endregion
 
@@ -21,32 +51,20 @@ namespace ElementIoT.Silicon.Repository.Query
 
         public async Task<DeviceReadModel> GetDeviceByID(string id)
         {
-            DeviceReadModel entity = new DeviceReadModel
+            DeviceReadModel readModel;
+
+            Device device = await this.CacheQueryProvider.GetDevice(id);
+
+            if (device != null)
             {
-                ID = "RFID-001",
-                Name = "RFID Sensor Kitchen",
-                IsMaster = false,
-                DeviceType = new DeviceTypeReadModel
-                {
-                    ID = "RFID-TYPE",
-                    Name = "RFID Sensor"
-                },
-                GeoLocation = new GeoLocationReadModel
-                {
-                    Latitude = 47.677064m,
-                    Longitude = -122.131309m,
-                    Address = "8383 158th Ave NE, Redmond, WA 98052"
-                }
-            };
+                readModel = device.ToReadModel();
+            }
+            else
+            {
+                readModel = await this.SqlQueryProvider.GetDevice(id);
+            }
 
-            string json = JsonConvert.SerializeObject(entity, Formatting.Indented);
-
-            System.Diagnostics.Debug.WriteLine("---------------------------------------");
-            System.Diagnostics.Debug.WriteLine("REPOSITORY: Getting the entity using the repository.");
-            System.Diagnostics.Debug.WriteLine(json);
-            System.Diagnostics.Debug.WriteLine("---------------------------------------");
-
-            return await Task.FromResult(entity);
+            return readModel;
         }
 
         #endregion

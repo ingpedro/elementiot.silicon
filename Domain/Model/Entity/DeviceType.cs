@@ -1,4 +1,5 @@
 ﻿using ElementIoT.Particle.Infrastructure.Model;
+using ElementIoT.Silicon.Domain.Model.Read;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -55,6 +56,18 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         #endregion
 
         #region Methods
+
+        public DeviceTypeReadModel ToReadModel()
+        {
+            return new DeviceTypeReadModel
+            {
+                Key = this.Key,
+                DeviceTypeID = this.DeviceTypeID,
+                Name = this.Name,
+                Description = this.Description
+            };
+        }
+
         #endregion
     }
 }
