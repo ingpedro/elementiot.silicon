@@ -32,19 +32,22 @@ using SqlQProvider = ElementIoT.Silicon.DataProvider.SqlProvider.Query;
 
 using CacheQProvider = ElementIoT.Silicon.DataProvider.CacheProvider.Query;
 using ElementIoT.Particle.Operational.Caching;
+using Microsoft.IdentityModel.Tokens;
+using ElementIoT.Particle.Infrastructure.Api;
 
 namespace ElementIoT.Silicon.Api.Gateway
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Startup
+    public class Startup: ApiStartup
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration) :
+            base(configuration)
         {
             Configuration = configuration;
         }
@@ -64,33 +67,15 @@ namespace ElementIoT.Silicon.Api.Gateway
         /// <param name="services">The services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(sharedOptions =>
-            {
-                sharedOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddAzureAdBearer(options => Configuration.Bind("AzureAd", options));
+            base.ConfigureAuthenticationServices(services);
 
             services.AddMvc();
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Title = "Element IoT - Device API",
-                    Version = "v1",
-                    Description = "Endpoints for managing devices."
-                });
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
+            base.ConfigureSwaggerServices(services);
 
             // Core Services
             services.AddLogging();
-            services.AddSingleton<IConfiguration>(Configuration);         
+            services.AddSingleton<IConfiguration>(Configuration);
 
             // Operational
             services.AddSingleton<ILogPolicy, DevLogPolicy>();
@@ -102,7 +87,7 @@ namespace ElementIoT.Silicon.Api.Gateway
             services.AddScoped<SqlCProvider.IDeviceCommandDataProvider, SqlCProvider.DeviceDataProvider>();
             services.AddScoped<SqlQProvider.IDeviceQueryDataProvider, SqlQProvider.DeviceDataProvider>();
             services.AddScoped<CacheQProvider.IDeviceQueryDataProvider, CacheQProvider.DeviceDataProvider>();
-            
+
 
             // Repositories
             services.AddScoped<CRepository.IDeviceRepository, CRepository.DeviceRepository>();
@@ -112,7 +97,7 @@ namespace ElementIoT.Silicon.Api.Gateway
             services.AddScoped<IDeviceService, DeviceService>();
 
             // Command and Event Handlers
-            
+
             services.AddMediatR(typeof(CommandHandler<ICommand>).Assembly);
             services.AddMediatR(typeof(SiliconCommandHandler).Assembly);
             services.AddMediatR(typeof(SiliconEventHandler).Assembly);
@@ -137,15 +122,7 @@ namespace ElementIoT.Silicon.Api.Gateway
 
             app.UseAuthentication();
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+            base.ConfigureSwaggerApp(app, env);
 
             app.UseMvc();
         }

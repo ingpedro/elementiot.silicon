@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Model\ElementIoT.Silicon.Domain.Model.csproj" />
+    <ProjectReference Include="..\..\Service\Command\ElementIoT.Silicon.Service.Command.csproj" />
   </ItemGroup>
 
   <ItemGroup>

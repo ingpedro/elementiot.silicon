@@ -6,7 +6,15 @@ using System.Text;
 namespace ElementIoT.Silicon.Domain.Model.Entity
 {
     /// <summary>
-    /// defines a type that represents the authentication type a device uses.
+    /// Defines a type that represents th entities that are contained in this context.
+    /// </summary>
+    public enum DomainType
+    {
+        Device
+    }
+
+    /// <summary>
+    /// Defines a type that represents the authentication type a device uses.
     /// </summary>
     public enum DeviceAuthenticationType
     {    

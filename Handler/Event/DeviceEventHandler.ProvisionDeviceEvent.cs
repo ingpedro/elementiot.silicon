@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace ElementIoT.Silicon.Handler.Event
 {
     public partial class DeviceEventHandler :
-        ElementIoT.Particle.Infrastructure.Model.Handling.EventHandler<ProvisionDeviceEvent>,
+        ElementIoT.Particle.Infrastructure.Model.Handling.IEventHandler<ProvisionDeviceEvent>,
         INotificationHandler<ProvisionDeviceEvent>
     {
         #region Properties        
@@ -51,11 +51,11 @@ namespace ElementIoT.Silicon.Handler.Event
         /// Handles the specified notification.
         /// </summary>
         /// <param name="command">The command.</param>
-        public override async Task Handle(ProvisionDeviceEvent notification)
+        public async Task Handle(ProvisionDeviceEvent notification)
         {
             try
             {
-                await base.Handle(notification);
+                // await base.Handle(notification);
 
                 string json = JsonConvert.SerializeObject(notification, Formatting.Indented);
 

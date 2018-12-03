@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ElementIoT.Silicon.Handler.Event
 {
     public partial class CommandEventHandler :
-        ElementIoT.Particle.Infrastructure.Model.Handling.EventHandler<CommandFailedEvent>,
+        ElementIoT.Particle.Infrastructure.Model.Handling.IEventHandler<CommandFailedEvent>,
         INotificationHandler<CommandFailedEvent>
     {
         #region Properties
@@ -21,17 +21,6 @@ namespace ElementIoT.Silicon.Handler.Event
         #endregion
 
         #region Constructors
-
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CommandEventHandler" /> class.
-        /// </summary>
-        /// <param name="logService">The log service.</param>
-        /// <param name="errorService">The error service.</param>
-        public CommandEventHandler(ILogPolicy logService, IErrorPolicy errorService)
-            : base(logService, errorService)
-        {
-        }
 
         #endregion
 
@@ -52,14 +41,11 @@ namespace ElementIoT.Silicon.Handler.Event
         /// Handles the specified notification.
         /// </summary>
         /// <param name="command">The command.</param>
-        public override async Task Handle(CommandFailedEvent notification)
+        public async Task Handle(CommandFailedEvent notification)
         {
             try
             {
-                await base.Handle(notification);
-
-                
-
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {

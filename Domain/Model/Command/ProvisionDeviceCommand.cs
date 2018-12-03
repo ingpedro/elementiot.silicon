@@ -1,4 +1,5 @@
 ﻿using ElementIoT.Particle.Infrastructure.Model.Messaging;
+using ElementIoT.Silicon.Domain.Model.Entity;
 using MediatR;
 using Newtonsoft.Json;
 using System;
@@ -19,6 +20,9 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         #endregion
 
         #region Properties
+
+        public override string Domain
+        { get; set; } = DomainType.Device.ToString();
 
         /// <summary>
         /// Gets or sets the device identifier.
@@ -70,7 +74,7 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         /// <value>
         ///   <c>true</c> if this instance is master; otherwise, <c>false</c>.
         /// </value>
-        [JsonProperty("isRoot",DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty("isRoot", DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool IsRoot
         { get; set; }
 
@@ -92,7 +96,7 @@ namespace ElementIoT.Silicon.Domain.Model.Command
         /// <summary>
         /// Initializes a new instance of the <see cref="ProvisionDeviceCommand"/> class.
         /// </summary>
-        public ProvisionDeviceCommand() 
+        public ProvisionDeviceCommand()
             : base()
         {
         }

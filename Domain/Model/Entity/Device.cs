@@ -99,7 +99,14 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
         public ICollection<Device> ChildDevices
         { get; set; }
 
-
+        /// <summary>
+        /// Gets or sets the location.
+        /// </summary>
+        /// <value>
+        /// The location.
+        /// </value>
+        public GeoLocation Location
+        { get; set; }
 
         #endregion
 
@@ -117,10 +124,12 @@ namespace ElementIoT.Silicon.Domain.Model.Entity
                 Name = this.Name,
                 Description = this.Description,
 
-                DeviceType = this.DeviceType.ToReadModel(),
+                DeviceType = this.DeviceType.ToReadModel(),            
 
                 IsRoot = this.IsRoot,
                 IsEnabled = this.IsEnabled,
+
+                GeoLocation = this.Location.ToReadModel(),
             };
         }
 

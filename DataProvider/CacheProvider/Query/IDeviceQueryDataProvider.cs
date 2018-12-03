@@ -1,4 +1,5 @@
 ﻿using ElementIoT.Silicon.Domain.Model.Entity;
+using ElementIoT.Silicon.Domain.Model.Read;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace ElementIoT.Silicon.DataProvider.CacheProvider.Query
 {
     public interface IDeviceQueryDataProvider
     {
-        Task<Device> GetDevice(string entityId);
+        Task<DeviceReadModel> GetDevice(string entityId);
     }
 }

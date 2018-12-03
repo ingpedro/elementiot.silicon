@@ -1,31 +1,22 @@
-﻿using ElementIoT.Silicon.Domain.Model.Command;
-using ElementIoT.Silicon.Domain.Model.Entity;
-using ElementIoT.Particle.Infrastructure.Model.Handling;
+﻿using ElementIoT.Particle.Infrastructure.Model.Handling;
 using ElementIoT.Particle.Infrastructure.Model.Messaging;
+using ElementIoT.Particle.Operational.Error;
+using ElementIoT.Particle.Operational.Logging;
+using ElementIoT.Silicon.Domain.Model.Command;
 using MediatR;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ElementIoT.Silicon.Domain.Model.Event;
-using ElementIoT.Silicon.Repository.Command;
-using ElementIoT.Particle.Operational.Logging;
-using ElementIoT.Particle.Operational.Error;
 
 namespace ElementIoT.Silicon.Handler.Command
 {
-    /// <summary>
-    /// Command Handler responsible for provisioning a device intot he IoT Hub and into the applications's database
-    /// </summary>
-    /// <seealso cref="CommandHandler{ProvisionDeviceCommand}" />
-    /// <seealso cref="IRequestHandler{ProvisionDeviceCommand, String}" />
-    public class ProvisionDeviceCommandHandler :
-        CommandHandler<ProvisionDeviceCommand>,
-        IRequestHandler<ProvisionDeviceCommand, string>
+    public class SubmitReceivedCommandHandler :
+        CommandHandler<SubmitReceivedCommand>,
+        IRequestHandler<SubmitReceivedCommand, string>
     {
         #region Properties        
-
-        protected IDeviceRepository DeviceRepository
-        { get; }
 
         #endregion
 
@@ -38,10 +29,10 @@ namespace ElementIoT.Silicon.Handler.Command
         /// <param name="errorService">The error service.</param>
         /// <param name="eventBus">The event bus.</param>
         /// <param name="deviceRepository">The device repository.</param>
-        public ProvisionDeviceCommandHandler(ILogPolicy logService, IErrorPolicy errorService, IEventBus eventBus, IDeviceRepository deviceRepository)
+        public SubmitReceivedCommandHandler(ILogPolicy logService, IErrorPolicy errorService, IEventBus eventBus)
             : base(logService, errorService, eventBus)
         {
-            this.DeviceRepository = deviceRepository;
+
         }
 
         #endregion
@@ -54,7 +45,7 @@ namespace ElementIoT.Silicon.Handler.Command
         /// <param name="request">The request.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
-        public async Task<string> Handle(ProvisionDeviceCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SubmitReceivedCommand request, CancellationToken cancellationToken)
         {
             await this.Handle(request);
 
@@ -66,12 +57,12 @@ namespace ElementIoT.Silicon.Handler.Command
         /// Handles the specified command.
         /// </summary>
         /// <param name="command">The command.</param>
-        public override async Task Handle(ProvisionDeviceCommand command)
+        public override async Task Handle(SubmitReceivedCommand command)
         {
             try
             {
                 // Notify that the command was sent.
-                await this.EventBus.Publish(new CommandReceivedEvent(command));
+                // await this.EventBus.Publish(new CommandReceivedEvent(command));
 
                 command.Handle();
 
@@ -79,12 +70,12 @@ namespace ElementIoT.Silicon.Handler.Command
                 var entity = Map(command);
 
                 // Persist the entity with the repository.
-                await this.DeviceRepository.ProvisionDevice(entity);
+                // await this.DeviceRepository.ProvisionDevice(entity);
 
                 command.Handled();
 
                 // Notify that the command was handled.
-                await this.EventBus.Publish(new ProvisionDeviceEvent(command, entity));
+                // await this.EventBus.Publish(new ProvisionDeviceEvent(command, entity));
             }
             catch (Exception ex)
             {
@@ -103,27 +94,9 @@ namespace ElementIoT.Silicon.Handler.Command
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        private Device Map(ProvisionDeviceCommand command)
+        private object Map(SubmitReceivedCommand command)
         {
-            DeviceIdentity identity = new DeviceIdentity();
-            identity.GenerateHubKey();
-
-            Device entity = new Device
-            {
-                Identity = identity,
-                DeviceID = command.DeviceID,
-                Name = command.DeviceName,
-                Description = command.DeviceDescription,
-                DeviceType = new DeviceType
-                {
-                    Key = command.DeviceTypeKey
-                },
-                IsRoot = command.IsRoot,
-                IsEnabled = command.IsEnabled,
-                CreatedBy = command.SenderIdentity
-            };
-
-            return entity;
+            return null;
         }
 
         #endregion

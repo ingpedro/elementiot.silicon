@@ -1,17 +1,13 @@
 ﻿using ElementIoT.Particle.Infrastructure.Model;
-using ElementIoT.Silicon.Domain.Model.Entity;
+using ElementIoT.Silicon.Domain.Model.Read;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ElementIoT.Silicon.Domain.Model.Read
+namespace ElementIoT.Silicon.Domain.Model.Entity
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <seealso cref="ElementIoT.Particle.Infrastructure.Model.ReadEntity{System.Guid}" />
-    public class GeoLocationReadModel: ReadEntity<Guid>
+    public class GeoLocation: ValueObject
     {
         #region Fields
         #endregion
@@ -55,9 +51,9 @@ namespace ElementIoT.Silicon.Domain.Model.Read
 
         #region Methods
 
-        public GeoLocation ToReadModel()
+        public GeoLocationReadModel ToReadModel()
         {
-            return new GeoLocation
+            return new GeoLocationReadModel
             {
                 Latitude = this.Latitude,
                 Longitude = this.Longitude,

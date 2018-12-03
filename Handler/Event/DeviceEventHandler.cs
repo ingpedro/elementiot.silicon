@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace ElementIoT.Silicon.Handler.Event
 {
-    public partial class DeviceEventHandler 
+    public partial class DeviceEventHandler :
+        ElementIoT.Particle.Infrastructure.Model.Handling.EventHandler
 
     {
 

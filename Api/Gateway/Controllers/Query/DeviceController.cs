@@ -72,7 +72,7 @@ namespace ElementIoT.Silicon.Api.Gateway.Controllers.Query
         [HttpGet]
         [ProducesResponseType(200)]
         [Route("{id}")]
-        // [Authorize]
+        [Authorize]
         public async Task<IActionResult> GetDevice(string id)
         {
             try

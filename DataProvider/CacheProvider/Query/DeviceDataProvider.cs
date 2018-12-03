@@ -6,6 +6,7 @@ using ElementIoT.Particle.Operational.Caching;
 using ElementIoT.Particle.Operational.Error;
 using ElementIoT.Particle.Operational.Logging;
 using ElementIoT.Silicon.Domain.Model.Entity;
+using ElementIoT.Silicon.Domain.Model.Read;
 using Microsoft.Extensions.Configuration;
 
 namespace ElementIoT.Silicon.DataProvider.CacheProvider.Query
@@ -61,9 +62,11 @@ namespace ElementIoT.Silicon.DataProvider.CacheProvider.Query
         /// </summary>
         /// <param name="entityId">The entity identifier.</param>
         /// <returns></returns>
-        public async Task<Device> GetDevice(string entityId)
+        public async Task<DeviceReadModel> GetDevice(string entityId)
         {
-            return await Task.FromResult(this.CacheService.Get<Device>(this.cacheScope, entityId));
+            var deviceEntity = this.CacheService.Get<Device>(this.cacheScope, entityId);
+
+            return await Task.FromResult(deviceEntity?.ToReadModel());
         }
 
         #endregion

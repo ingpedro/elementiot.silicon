@@ -49,20 +49,16 @@ namespace ElementIoT.Silicon.Repository.Query
 
         #region Methods
 
+        /// <summary>
+        /// Gets the device by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public async Task<DeviceReadModel> GetDeviceByID(string id)
         {
-            DeviceReadModel readModel;
-
-            Device device = await this.CacheQueryProvider.GetDevice(id);
-
-            if (device != null)
-            {
-                readModel = device.ToReadModel();
-            }
-            else
-            {
-                readModel = await this.SqlQueryProvider.GetDevice(id);
-            }
+            //Try to get the device from the cache first, then from Sql if it doesn't exist
+            DeviceReadModel readModel = await this.CacheQueryProvider.GetDevice(id) ??
+                                        await this.SqlQueryProvider.GetDevice(id);
 
             return readModel;
         }

@@ -7,6 +7,7 @@ using ElementIoT.Particle.Operational.Error;
 using ElementIoT.Particle.Operational.Logging;
 using ElementIoT.Silicon.Domain.Model.Command;
 using ElementIoT.Silicon.Service.Command;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ElementIoT.Silicon.Api.Gateway.Controllers.Command
 {
@@ -66,7 +67,7 @@ namespace ElementIoT.Silicon.Api.Gateway.Controllers.Command
         [HttpPost]
         [ProducesResponseType(202)]
         [Route("")]
-        // [Authorize]
+        [Authorize]
         public async Task<IActionResult> ProvisionDevice([FromBody]ProvisionDeviceCommand command)
         {
             try
